@@ -193,7 +193,7 @@ SELECT * FROM team WHERE foundation<'1900-01-01';
 SELECT DISTINCT sport FROM team;
 
 --El número de localidades distintas que hay.
-SELECT COUNT(DISTINCT sport) FROM team;
+SELECT COUNT(DISTINCT city) FROM team;
 
 --Las ciudades en las que se juega al balonmano.
 SELECT DISTINCT city FROM team WHERE sport='handball';
@@ -217,6 +217,6 @@ SELECT * FROM player WHERE name LIKE 'P%';
 SELECT * FROM player WHERE number=2;
 
 --Los jugadores cuyo apellido tiene una 'K' y su dorsal es el 9.
-SELECT * FROM player WHERE surname1 LIKE 'K%' AND number=9 ;
+SELECT * FROM player WHERE surname1 LIKE '%k%' AND number=9 ;
 
 

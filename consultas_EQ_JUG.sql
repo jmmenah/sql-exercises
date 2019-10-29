@@ -4,13 +4,13 @@
 SELECT * FROM equipo WHERE id_equipo<=9;
 
 --Equipos de más del siglo pasado.
-SELECT * FROM equipo WHERE fundacion<'1900-01-01';
+SELECT * FROM equipo WHERE fundacion<'2000-01-01';
 
 --Los distintos deportes que hay.
 SELECT DISTINCT deporte FROM equipo;
 
 --El número de localidades distintas que hay.
-SELECT COUNT(DISTINCT deporte) FROM equipo;
+SELECT COUNT(DISTINCT localidad) FROM equipo;
 
 --Las ciudades en las que se juega al balonmano.
 SELECT DISTINCT localidad FROM equipo WHERE deporte='handball';
@@ -34,5 +34,5 @@ SELECT * FROM jugador WHERE nombre LIKE 'P%';
 SELECT * FROM jugador WHERE dorsal=2;
 
 --Los jugadores cuyo apellido tiene una 'K' y su dorsal es el 9.
-SELECT * FROM jugador WHERE ape1 LIKE 'K%' AND number=9 ;
+SELECT * FROM jugador WHERE ape1 LIKE '%k%' AND number=9 ;
 
