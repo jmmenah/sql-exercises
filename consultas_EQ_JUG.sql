@@ -34,5 +34,5 @@ SELECT * FROM jugador WHERE nombre LIKE 'P%';
 SELECT * FROM jugador WHERE dorsal=2;
 
 --Los jugadores cuyo apellido tiene una 'K' y su dorsal es el 9.
-SELECT * FROM jugador WHERE ape1 LIKE '%k%' AND number=9 ;
+SELECT * FROM jugador WHERE ape1 LIKE '%k%' AND dorsal=9 ;
 
