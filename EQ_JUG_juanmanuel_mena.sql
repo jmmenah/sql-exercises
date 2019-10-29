@@ -180,3 +180,43 @@ insert into player (idplayer, name, surname1, surname2, gender, birthdate, numbe
 
 --Eliminamos los dorsales de los deportes que no tienen
 UPDATE player SET number=NULL WHERE team = 5 OR team = 8 OR team = 10;
+
+--Consultas
+
+--Equipos con ID entre 1 y 9.
+SELECT * FROM team WHERE idteam<=9;
+
+--Equipos de más del siglo pasado.
+SELECT * FROM team WHERE foundation<'1900-01-01';
+
+--Los distintos deportes que hay.
+SELECT DISTINCT sport FROM team;
+
+--El número de localidades distintas que hay.
+SELECT COUNT(DISTINCT sport) FROM team;
+
+--Las ciudades en las que se juega al balonmano.
+SELECT DISTINCT city FROM team WHERE sport='handball';
+
+--Las ciudades en las que se juega al balonmano o al fútbol.
+SELECT DISTINCT city FROM team WHERE sport='handball' OR sport='football';
+
+--Los jugadores del equipo 6.
+SELECT * FROM player WHERE team=6;
+
+--Los jugadores del equipo 7 o del 9.
+SELECT * FROM player WHERE team=7 OR team=9;
+
+--Todos los jugadores que son porteros (dorsal 1).
+SELECT * FROM player WHERE number=1;
+
+--Todos los jugadores que empiezan por P.
+SELECT * FROM player WHERE name LIKE 'P%';
+
+--Jugadores con dorsal 2.
+SELECT * FROM player WHERE number=2;
+
+--Los jugadores cuyo apellido tiene una 'K' y su dorsal es el 9.
+SELECT * FROM player WHERE surname1 LIKE 'K%' AND number=9 ;
+
+
