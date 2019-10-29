@@ -187,7 +187,7 @@ UPDATE player SET number=NULL WHERE team = 5 OR team = 8 OR team = 10;
 SELECT * FROM team WHERE idteam<=9;
 
 --Equipos de más del siglo pasado.
-SELECT * FROM team WHERE foundation<'1900-01-01';
+SELECT * FROM team WHERE foundation<'2000-01-01';
 
 --Los distintos deportes que hay.
 SELECT DISTINCT sport FROM team;
