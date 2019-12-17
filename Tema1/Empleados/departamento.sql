@@ -1,0 +1,10 @@
+insert into departamento (cod_depto, nombre, localidad) values (1, 'VENTAS', 'CORDOBA');
+insert into departamento (cod_depto, nombre, localidad) values (2, 'CONTABILIDAD', 'SEVILLA');
+insert into departamento (cod_depto, nombre, localidad) values (3, 'VENTAS', 'JAEN');
+insert into departamento (cod_depto, nombre, localidad) values (4, 'I+D', 'CORDOBA');
+insert into departamento (cod_depto, nombre, localidad) values (5, 'OPERACIONES', 'SEVILLA');
+insert into departamento (cod_depto, nombre, localidad) values (6, 'VENTAS', 'JAEN');
+insert into departamento (cod_depto, nombre, localidad) values (7, 'VENTAS', 'CORDOBA');
+insert into departamento (cod_depto, nombre, localidad) values (8, 'I+D', 'CORDOBA');
+insert into departamento (cod_depto, nombre, localidad) values (9, 'I+D', 'SEVILLA');
+insert into departamento (cod_depto, nombre, localidad) values (10, 'OPERACIONES', 'JAEN');
