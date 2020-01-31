@@ -56,8 +56,8 @@ ENGINE = InnoDB;
 -- Table `Pr6Ej1`.`seccion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Pr6Ej1`.`seccion` (
-  `id_sec` VARCHAR(5) NOT NULL,
-  `descripcion` VARCHAR(10) NOT NULL,
+  `id_sec` VARCHAR(10) NOT NULL,
+  `descripcion` VARCHAR(15) NOT NULL,
   `n_empl_jefe` INT NULL,
   PRIMARY KEY (`id_sec`),
   UNIQUE INDEX `id_sec_UNIQUE` (`id_sec` ASC),
@@ -74,8 +74,8 @@ ENGINE = InnoDB;
 -- Table `Pr6Ej1`.`empresa`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Pr6Ej1`.`empresa` (
-  `cod_empr` VARCHAR(5) NOT NULL,
-  `nombre` VARCHAR(15) NOT NULL,
+  `cod_empr` VARCHAR(10) NOT NULL,
+  `nombre` VARCHAR(30) NOT NULL,
   `direccion` VARCHAR(35) NULL,
   `telefono` VARCHAR(11) NULL,
   `correo` VARCHAR(20) NULL,
@@ -95,10 +95,10 @@ ENGINE = InnoDB;
 -- Table `Pr6Ej1`.`producto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Pr6Ej1`.`producto` (
-  `cod_prod` INT NOT NULL,
+  `cod_prod` VARCHAR(5) NOT NULL,
   `precio_compra` FLOAT NULL,
   `precio_venta` FLOAT NULL,
-  `empresa` VARCHAR(5) NOT NULL,
+  `empresa` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`cod_prod`, `empresa`),
   UNIQUE INDEX `cod_prod_UNIQUE` (`cod_prod` ASC),
   INDEX `fk_producto_empresa_idx` (`empresa` ASC),
@@ -113,3 +113,104 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+
+INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('ATV','Antivirus',5);
+INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('CONT','Contabilidad',8);
+INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('EDU','Educativo',7);
+INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('JUG','Juegos',NULL);
+INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('OFI','Ofimática',10);
+INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('OTR','Otros',3);
+
+
+
+INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('ANTV_SA', 'Antivirus,S.A.', NULL, '611111111', 'antvsa@correo.com', '05');
+INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('OFI_JA', 'OfiJaén,S.L.', NULL, '622222222', 'ofija@correo.com', '22');
+INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('EDUSYS', 'EduSystem,S.A.', NULL, '633333333', 'edusystem@correo.es', '15');
+INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('JUG_D', 'Juegos y Deportes,S.A.', NULL, '644444444', 'juegos@correo.es', '50');
+INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('CONT_SA', 'Contabilidad,S.A.', NULL, '655555555', 'contsa@correo.es', '26');
+INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('CONTABLE', 'Contable,S.L.', NULL, '677777777', 'contablesl@correo.es', '36');
+INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('EDUSOFT', 'EduSoft,S.L.', NULL, '688888888', 'edusoft@correo.es', '42');
+
+
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (0,'Álava');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (1,'Albacete');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (2,'Alicante');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (3,'Almería');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (4,'Ávila');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (5,'Badajoz');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (6,'Islas Baleares');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (7,'Barcelona');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (8,'Burgos');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (9,'Cáceres');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (10,'Cádiz');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (11,'Castellón');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (12,'Ciudad Real');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (13,'Córdoba');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (14,'Coruña');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (15,'Cuenca');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (16,'Girona');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (17,'Granada');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (18,'Guadalajara');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (19,'Gipuzkoa');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (20,'Huelva');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (21,'Huesca');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (22,'Jaén');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (23,'León');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (24,'Lleida');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (25,'La Rioja');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (26,'Lugo');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (27,'Madrid');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (28,'Málaga');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (29,'Murcia');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (30,'Navarra');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (31,'Ourense');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (32,'Asturias');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (33,'Palencia');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (34,'Las Palmas');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (35,'Pontevedra');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (36,'Salamanca');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (37,'S.C.Tenerife');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (38,'Cantabria');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (39,'Segovia');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (40,'Sevilla');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (41,'Soria');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (42,'Tarragona');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (43,'Teruel');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (44,'Toledo');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (45,'Valencia');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (46,'Valladolid');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (47,'Vizcaya');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (48,'Zamora');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (49,'Zaragoza');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (50,'Ceuta');
+INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (51,'Melilla');
+
+
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('0', 'Jaime', 'Segovia', 'Segovia', '14', 'CONT');
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('1', 'Manuel', 'Aguilar', 'Aguilar', '17', 'EDU');
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('2', 'Alba', 'Rodríguez', 'Cano', '20', 'OTR');
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('3', 'Alicia', 'Valdivia', 'Cobo', '18', 'OFI');
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('4', 'Felipe', 'Extremera', 'Escabias', '18', 'ATV');
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('5', 'Julián', 'Cobo', 'Aceituno', '22', 'JUG');
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('6', 'Antonia', 'Ruiz', 'Ruiz', '22', 'EDU');
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('7', 'María', 'Madera', 'Molina', '13', 'CONT');
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('8', 'Andrés', 'Tello', 'García', '05', 'EDU');
+INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('9', 'Mario', 'Molina', 'Pérez', '06', 'OFI');
+
+
+INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('AVW', '15', '20', 'ANTV_SA');
+INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('ECBIO', '10', '30', 'EDUSOFT');
+INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('ECSH', '20', '40', 'EDUSYS');
+INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('JUBA', '10', '30', 'JUG_D');
+INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('COPY', '30', '60', 'CONT_SA');
+INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('COOP', '30', '60', 'CONTABLE');
+INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('OFIP', '10', '20', 'OFI_JA');
+INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('OFIC', '10', '20', 'OFI_JA');
+INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('AVAN', '10', '15', 'ANTV_SA');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+
