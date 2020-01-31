@@ -114,8 +114,12 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+--Desactivamos la comprobacion de claves foraneas
 SET FOREIGN_KEY_CHECKS = 0;
 
+-- -----------------------------------------------------
+-- Inserts `Pr6Ej1`.`seccion`
+-- -----------------------------------------------------
 
 INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('ATV','Antivirus',5);
 INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('CONT','Contabilidad',8);
@@ -124,7 +128,9 @@ INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('JUG','Jueg
 INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('OFI','Ofimática',10);
 INSERT INTO `seccion` (`id_sec`,`descripcion`,`n_empl_jefe`) VALUES ('OTR','Otros',3);
 
-
+-- -----------------------------------------------------
+-- Inserts `Pr6Ej1`.`empresa`
+-- -----------------------------------------------------
 
 INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('ANTV_SA', 'Antivirus,S.A.', NULL, '611111111', 'antvsa@correo.com', '05');
 INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('OFI_JA', 'OfiJaén,S.L.', NULL, '622222222', 'ofija@correo.com', '22');
@@ -134,6 +140,9 @@ INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `
 INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('CONTABLE', 'Contable,S.L.', NULL, '677777777', 'contablesl@correo.es', '36');
 INSERT INTO `Pr6Ej1`.`empresa` (`cod_empr`, `nombre`, `direccion`, `telefono`, `correo`, `provincia`) VALUES ('EDUSOFT', 'EduSoft,S.L.', NULL, '688888888', 'edusoft@correo.es', '42');
 
+-- -----------------------------------------------------
+-- Inserts `Pr6Ej1`.`provincia`
+-- -----------------------------------------------------
 
 INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (0,'Álava');
 INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (1,'Albacete');
@@ -188,6 +197,9 @@ INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (49,'Zaragoza');
 INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (50,'Ceuta');
 INSERT INTO `provincia` (`cod_prov`,`nombre`) VALUES (51,'Melilla');
 
+-- -----------------------------------------------------
+-- Inserts `Pr6Ej1`.`empleado`
+-- -----------------------------------------------------
 
 INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('0', 'Jaime', 'Segovia', 'Segovia', '14', 'CONT');
 INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('1', 'Manuel', 'Aguilar', 'Aguilar', '17', 'EDU');
@@ -200,6 +212,9 @@ INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `
 INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('8', 'Andrés', 'Tello', 'García', '05', 'EDU');
 INSERT INTO `Pr6Ej1`.`empleado` (`n_empl`, `nombre`, `apellido1`, `apellido2`, `provincia`, `id_sec`) VALUES ('9', 'Mario', 'Molina', 'Pérez', '06', 'OFI');
 
+-- -----------------------------------------------------
+-- Inserts `Pr6Ej1`.`producto`
+-- -----------------------------------------------------
 
 INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('AVW', '15', '20', 'ANTV_SA');
 INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('ECBIO', '10', '30', 'EDUSOFT');
@@ -211,6 +226,87 @@ INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `e
 INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('OFIC', '10', '20', 'OFI_JA');
 INSERT INTO `Pr6Ej1`.`producto` (`cod_prod`, `precio_compra`, `precio_venta`, `empresa`) VALUES ('AVAN', '10', '15', 'ANTV_SA');
 
+--Activamos la comprobacion de las claves foraneas
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 
+--Incrementa en un 5% el precio de compra de todos los productos de la empresa OFI_JA
+
+UPDATE `Pr6Ej1`.`producto` SET precio_compra=precio_compra*1.05 WHERE empresa='OFI_JA';
+
+--Reduce en un 8% el precio de venta de todos los productos cuyo precio_venta sea mayor de 60
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE `Pr6Ej1`.`producto` SET precio_compra=precio_compra*0.92 WHERE precio_venta>=60;
+SET SQL_SAFE_UPDATES = 1;
+
+--Establece un beneficio del 30% para todos los productos cuyo precio de compra está entre 9 y 14. Es decir, el precio_venta será igual al precio_compra + 30%precio_compra
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE `Pr6Ej1`.`producto` SET precio_venta=precio_compra*1.3 WHERE precio_compra>9 AND precio_compra<14;
+SET SQL_SAFE_UPDATES = 1;
+
+--Establece como empleado jefe de la sección juegos al empleado de código 6 (Julián Cobo).
+
+UPDATE `Pr6Ej1`.`seccion` SET n_empl_jefe=6 WHERE id_sec='JUG';
+
+--Alicia Valdivia Cobo ha cambiado de sección: pasa de ofimática a otros. Incluye esta modificación en la base de datos (no debes usar el código del empleado, solo el nombre y los apellidos)
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE `Pr6Ej1`.`empleado` SET id_sec='OTR' WHERE nombre='Alicia' AND apellido1='Valdivia' AND apellido2='Cobo';
+SET SQL_SAFE_UPDATES = 1;
+
+--Modifica la provincia del empleado de código 1 a la 19
+
+UPDATE `Pr6Ej1`.`empleado` SET provincia=19 WHERE n_empl=1;
+
+--Cambia el correo electrónico de la empresa CONT_SA a correosa@correo.com
+
+UPDATE `Pr6Ej1`.`empresa` SET correo='correosa@correo.com' WHERE cod_empr='CONT_SA';
+
+--Deja el departamento otros sin jefe
+
+UPDATE `Pr6Ej1`.`seccion` SET `n_empl_jefe`=NULL WHERE `id_sec`='OTR';
+
+--Cambia la denominación del producto OFIC a “hoja de cálculo de OFI_JA”
+
+--No puede hacerse, la tabla no tiene ese campo
+
+--Cambia el código del producto ECBIO a BIOED
+
+UPDATE `Pr6Ej1`.`producto` SET cod_prod='BIOED' WHERE cod_prod='ECBIO';
+
+--Cambia el código de la sección ATV a ANT. ¿Puedes hacerlo? Si ¿Se modifica la sección en los empleados que trabajan en ella? Si ¿Por qué? Por la clave foranea
+
+UPDATE `Pr6Ej1`.`seccion` SET id_sec='ANT' WHERE id_sec='ATV';
+
+--Borra el producto de código OFIP. ¿Puedes hacerlo? Si ¿Por qué?
+
+DELETE FROM `Pr6Ej1`.`producto` WHERE cod_prod='OFIP';
+
+--Borra la sección “JUG”. ¿Puedes hacerlo? No ¿Por qué? Porque la clave foranea no lo permite ¿Qué ocurre con los empleados y los productos de esta sección?
+
+DELETE FROM `Pr6Ej1`.`seccion` WHERE id_sec='JUG';
+
+--Borra la localidad de código 05. ¿Puedes hacerlo? No ¿Por qué? Porque hay tablas que usan esa provincia
+
+DELETE FROM `Pr6Ej1`.`provincia` WHERE cod_prov=5;
+
+--Borra el empleado de código 7. ¿Puedes hacerlo? Si ¿Por qué? Porque no existe ninguna tabla que use esa provincia
+
+DELETE FROM `Pr6Ej1`.`provincia` WHERE cod_prov=7;
+
+--Borra todas las tablas de la base de datos de forma que no obtengas ningún error cuando ejecutes las sentencias correspondientes. Justifica el orden de borrado
+
+--Es imposible ya que las tablas empleado y seccion estan relacionadas mutuamente, por tanto hay que desactivar las claves foraneas
+
+SET SQL_SAFE_UPDATES = 0;
+
+DROP TABLE `Pr6Ej1`.`producto`;
+DROP TABLE `Pr6Ej1`.`empresa`;
+DROP TABLE `Pr6Ej1`.`empleado`;
+DROP TABLE `Pr6Ej1`.`seccion`;
+DROP TABLE `Pr6Ej1`.`provincia`;
+
+SET SQL_SAFE_UPDATES = 1;
