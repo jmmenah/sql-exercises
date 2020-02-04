@@ -316,10 +316,10 @@ SET SQL_SAFE_UPDATES = 1;
 CREATE TABLE `ine`.`nombre_juan_manuel` (
   `provincia` VARCHAR(45) NOT NULL,
   `total` INT NOT NULL,
-  `por_mil` INT NOT NULL,
+  `por_mil` FLOAT NOT NULL,
   PRIMARY KEY (`provincia`));
 
-LOAD DATA INFILE '/home/juanma/Descargas/tnombres900094375.csv' 
+LOAD DATA INFILE '/var/lib/mysql-files/tnombres900094375.csv' 
 INTO TABLE nombres_juan_manuel
 FIELDS TERMINATED BY ',' 
 LINES TERMINATED BY '\n'
