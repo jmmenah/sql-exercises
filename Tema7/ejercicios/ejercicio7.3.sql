@@ -18,3 +18,4 @@ SELECT NIF,Cod_Asig,Nota,YEAR(Fecha) AS "Año" FROM Matrícula WHERE Nota<=6;
 SELECT NIF,Cod_Asig,Nota,ADDDATE(Fecha, INTERVAL 1 YEAR) AS "Nueva Fecha" FROM Matrícula;
 --10. Muestra un listado con las matrículas cuyo código de asignatura sea mayor que 4 y la nota sea menor que 7 restándole a la fecha un mes
 SELECT NIF,Cod_Asig,Nota,SUBDATE(Fecha, INTERVAL 1 MONTH) AS "Nueva Fecha" FROM Matrícula WHERE Cod_Asig>4 AND Nota<7;
+--11. Muestra un listado con los datos de todas las asignaturas. Si el departamento es nulo, debe mostrar el texto “Sin departamento”. Ordénalos por descripción de forma ascendente y por código de forma descendente
