@@ -1,15 +1,17 @@
 --1. Muestra el precio con IVA para todos los productos
 SELECT Cod_Prod,Precio_Compra*1.21 AS 'Precio con IVA' FROM Producto; 
 --2. Muestra el precio con IVA para los productos que valgan menos de 11 euros
-SELECT Cod_Prod,Precio_Compra*1.21 AS 'Precio con IVA' FROM Producto WHERE Precio_Compra<=10.0;
+SELECT Cod_Prod,Precio_Compra*1.21 AS 'Precio con IVA' FROM Producto WHERE Precio_Compra<11.0;
 --3. Muestra la denominación y el precio con IVA para los productos cuyo precio esté entre 10 y 20 euros
 SELECT Denominación,Precio_Compra*1.21 AS 'Precio con IVA' FROM Producto WHERE Precio_Compra<=20 AND Precio_Compra>=10;
+SELECT Denominación,Precio_Compra*1.21 AS 'Precio con IVA' FROM Producto WHERE Precio_Compra BETWEEN 10 AND 20;
 --4. Muestra todas las secciones en los que el número del empleado jefe sea menor que 5
 SELECT * FROM Sección WHERE N_Empl_Jefe<5;
 --5. Muestra los datos del empleado cuyo código sea la raíz cuadrada de 4
 SELECT * FROM Empleado WHERE SQRT(4)=N_Empl;
 --6. Obtén las iniciales de los empleados
 SELECT CONCAT(SUBSTRING(Nombre,1,1),SUBSTRING(Apellido1,1,1),SUBSTRING(Apellido2,1,1)) AS "Iniciales" FROM Empleado;
+SELECT CONCAT(LEFT(Nombre,1),LEFT(Apellido1,1),LEFT(Apellido2,1)) AS "Iniciales" FROM Empleado;
 --7. Selecciona el nombre y la longitud del mismo para todos los empleados
 SELECT CONCAT(Nombre,' ',LENGTH(Nombre)) AS "Nombre+longitud" FROM Empleado;
 --8. Muestra el nombre completo de todos los empleados (nombre + apellido1+ apellido2)
