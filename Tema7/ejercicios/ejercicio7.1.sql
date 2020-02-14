@@ -7,9 +7,9 @@ SELECT Cod_Asig, DATE_FORMAT(Fecha, "%d/%m/%Y") AS "Fecha" FROM Matrícula ORDER
 --4. ¿Qué asignaturas no pertenecen a ningún departamento?
 SELECT * FROM Asignatura WHERE Departamento IS NULL;
 --5. Obtén un listado de las matrículas donde figure la descripción de cada asignatura ordenados por nota de forma ascendente
-SELECT NIF, Descripción, Fecha, Nota FROM Matrícula,Asignatura WHERE (Código=Cod_Asig) ORDER BY Nota;
+SELECT NIF, Descripción, Fecha, Nota FROM Matrícula,Asignatura WHERE (Código=Cod_Asig) ORDER BY Nota ASC;
 --6. Muestra el nombre y los apellidos de todos los alumnos cuyo código de localidad sea 14049. Ten en cuenta que el nombre de las columnas debe aparecer tal y como se muestra a continuación
-SELECT Nombre ,Apellido1 ,Apellido2 FROM Alumno WHERE Cod_Localidad='14049';
+SELECT Nombre AS "Nombre" ,Apellido1 AS "1º Apellido" ,Apellido2 AS "2º Apellido" FROM Alumno WHERE Cod_Localidad='14049';
 --7. Muestra los datos de todas las asignaturas de 2-ESO, 3-ESO y 4-ESO
 SELECT * FROM Asignatura WHERE Curso="4-ESO" OR Curso="3-ESO" OR Curso="2-ESO";
 --8. Muestra los datos de todas las asignaturas cuyo código esté entre 3 y 6
