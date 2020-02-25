@@ -18,3 +18,5 @@ SELECT DISTINCT GovernmentForm FROM country;
 SELECT LocalName,country.Population,city.Name,city.Population FROM country,city WHERE country.Capital=city.ID;
 -- Muestra la esperanza de vida media en los países de Europa.
 SELECT AVG(LifeExpectancy) AS "Vida Media" FROM country WHERE Continent='Europe';
+-- Muestra la media de la esperanza de vida de las distintas regiones que sea mayor de 70 años.
+SELECT Region, AVG(LifeExpectancy) AS "Vida Media" FROM country GROUP BY Region HAVING AVG(LifeExpectancy)<70;
