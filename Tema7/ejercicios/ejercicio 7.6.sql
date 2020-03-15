@@ -22,6 +22,7 @@ SELECT COUNT(Matrícula.NIF) AS "Numero de matrículas" FROM Matrícula,Alumno,L
 SELECT Alumno.Nombre,Apellido1,Apellido2,Localidad.Nombre FROM Alumno,Localidad WHERE Cod_Localidad=Cod_Loc AND Cod_Localidad IS NOT NULL;
 -- 11. Muestra el mismo listado que el apartado anterior, pero incluyendo todos los alumnos. Si no tienen ninguna localidad asignada, debe mostrarse el texto “Localidad no asignada”. Resuelve la consulta de dos maneras
 SELECT Alumno.Nombre,Apellido1,Apellido2,IFNULL(Localidad.Nombre,"Localidad no Asignada") AS "Localidad" FROM Alumno LEFT JOIN Localidad ON Cod_Localidad=Cod_Loc;
+SELECT Alumno.Nombre,Apellido1,Apellido2,COALESCE(Localidad.Nombre,"Localidad no Asignada") AS "Localidad" FROM Alumno LEFT JOIN Localidad ON Cod_Localidad=Cod_Loc;
 -- 12. Muestra la nota media de los alumnos por localidad. Calcula también la de los alumnos que no tienen ninguna localidad asignada
 SELECT IFNULL(Cod_Localidad, "Sin Localidad Asignada") AS "Locadidad",AVG(Nota) AS "Media" FROM Matrícula RIGHT JOIN Alumno ON Matrícula.NIF=Alumno.NIF GROUP BY Cod_Localidad;
 -- 13. Muestra un listado con el nombre completo de los alumnos que se matricularon en el año más antiguo registrado en la base de datos
