@@ -20,3 +20,19 @@ SELECT Nombre,Apellido1,Apellido2 FROM Alumno NATURAL JOIN Matrícula WHERE Nota
 SELECT COUNT(Matrícula.NIF) AS "Numero de matrículas" FROM Matrícula,Alumno,Localidad WHERE Matrícula.NIF=Alumno.NIF AND Cod_Loc=Cod_Localidad AND Localidad.Nombre='Palma del Rio'; 
 -- 10. Muestra un listado de todos los alumnos que tengan alguna localidad asignada.Muestra el nombre, apellido1, apellido2 y el nombre de la localidad
 SELECT Alumno.Nombre,Apellido1,Apellido2,Localidad.Nombre FROM Alumno,Localidad WHERE Cod_Localidad=Cod_Loc AND Cod_Localidad IS NOT NULL;
+-- 11. Muestra el mismo listado que el apartado anterior, pero incluyendo todos los alumnos. Si no tienen ninguna localidad asignada, debe mostrarse el texto “Localidad no asignada”. Resuelve la consulta de dos maneras
+SELECT Alumno.Nombre,Apellido1,Apellido2,IFNULL(Localidad.Nombre,"Localidad no Asignada") AS "Localidad" FROM Alumno LEFT JOIN Localidad ON Cod_Localidad=Cod_Loc;
+-- 12. Muestra la nota media de los alumnos por localidad. Calcula también la de los alumnos que no tienen ninguna localidad asignada
+SELECT IFNULL(Cod_Localidad, "Sin Localidad Asignada") AS "Locadidad",AVG(Nota) AS "Media" FROM Matrícula RIGHT JOIN Alumno ON Matrícula.NIF=Alumno.NIF GROUP BY Cod_Localidad;
+-- 13. Muestra un listado con el nombre completo de los alumnos que se matricularon en el año más antiguo registrado en la base de datos
+SELECT CONCAT_WS(' ',Nombre,Apellido1,Apellido2) AS "Nombre completo" FROM Matrícula NATURAL JOIN Alumno WHERE YEAR(Fecha)=(SELECT MIN(YEAR(Fecha)) FROM Matrícula) GROUP BY NIF;
+-- 14. Muestra el nombre de las asignaturas (en mayúsculas) que en las que haya dos o más matrículas registradas
+SELECT UPPER(Descripción) AS "Asignatura" FROM Matrícula,Asignatura WHERE Código=Cod_Asig GROUP BY Descripción,Curso HAVING COUNT(*)>=2;
+-- 15. Selecciona el código de las asignaturas que tengan el máximo número de matrículas realizadas
+SELECT Cod_Asig FROM Matrícula GROUP BY Cod_Asig HAVING COUNT(*)>=2;
+-- 16. Igual que el caso anterior, pero mostrando la descripción de las asignaturas en lugar del código
+SELECT Descripción FROM Matrícula,Asignatura WHERE Cod_Asig=Código GROUP BY Cod_Asig HAVING COUNT(*)>=2;
+-- 17. Selecciona la localidad que tenga dos o más alumnos matriculados
+SELECT Localidad.Nombre FROM Matrícula,Alumno,Localidad WHERE Matrícula.NIF=Alumno.NIF AND Cod_Loc=Cod_Localidad GROUP BY Localidad.Nombre HAVING COUNT(*)>=2; 
+-- 18. Selecciona la descripción de las asignaturas cuyo número de matrículas esté entre 0 y 1
+SELECT Descripción FROM Matrícula,Alumno,Asignatura WHERE Matrícula.NIF=Alumno.NIF AND Código=Cod_Asig GROUP BY Descripción,Curso HAVING COUNT(*)<2; 
