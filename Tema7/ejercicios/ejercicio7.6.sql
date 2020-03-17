@@ -1,5 +1,6 @@
 -- 1. Selecciona todos los datos de las matrículas de los alumnos de Córdoba (el código de los pueblos de Córdoba empieza por 14)
 SELECT NIF,Cod_Asig,Nota,Fecha FROM Alumno NATURAL JOIN Matrícula WHERE Cod_Localidad LIKE '14%';
+SELECT * FROM Matrícula WHERE NIF IN(SELECT NIF FROM Alumno WHERE Cod_Localidad IN(SELECT Cod_Loc FROM Localidad WHERE Cod_Loc LIKE '14%'));
 -- 2. Obtén el número de matrículas total de las asignaturas del departamento de matemáticas
 SELECT COUNT(NIF) AS "Número de matrículas" FROM Matrícula,Asignatura WHERE Código=Cod_Asig AND Descripción='Matemáticas';
 -- 3. Selecciona el código de la asignatura y el NIF de los alumnos matriculados en alguna asignatura del departamento de matemáticas. Usa dos soluciones: con join y con where
