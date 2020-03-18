@@ -6,8 +6,10 @@ SELECT COUNT(NIF) AS "Número de matrículas" FROM Matrícula,Asignatura WHERE C
 -- 3. Selecciona el código de la asignatura y el NIF de los alumnos matriculados en alguna asignatura del departamento de matemáticas. Usa dos soluciones: con join y con where
 SELECT Cod_Asig,NIF FROM Matrícula,Asignatura WHERE Código=Cod_Asig AND Departamento='MAT';
 SELECT Cod_Asig,NIF FROM Matrícula JOIN Asignatura ON Código=Cod_Asig AND Departamento='MAT';
+SELECT Cod_Asig,NIF FROM Matrícula WHERE Cod_Asig IN (SELECT Código FROM Asignatura WHERE Departamento='MAT');
 -- 4. Selecciona el código de la asignatura y el nombre completo de los alumnos matriculados en alguna asignatura del departamento de matemáticas
 SELECT Cod_Asig, CONCAT_WS(' ',Nombre,Apellido1,Apellido2) AS "Nombre completo" FROM Matrícula,Alumno,Asignatura WHERE Alumno.NIF=Matrícula.NIF AND Código=Cod_Asig AND Departamento='MAT';
+SELECT CONCAT_WS(' ',Nombre,Apellido1,Apellido2) AS "Nombre completo" FROM Alumno WHERE IN (SELECT Cod_Asig FROM Matrícula WHERE Cod_Asig IN (SELECT Código FROM Asignatura WHERE Departamento='MAT'));
 -- 5. Selecciona el nombre completo del alumno con la máxima nota. Incluye dos soluciones: con subconsultas y sin subconsultas
 SELECT CONCAT_WS(' ',Nombre,Apellido1,Apellido2) AS "Nombre completo" FROM Matrícula NATURAL JOIN Alumno WHERE Nota=(SELECT MAX(Nota) FROM Matrícula);
 SELECT CONCAT_WS(' ',Nombre,Apellido1,Apellido2) AS "Nombre completo" FROM Matrícula NATURAL JOIN Alumno ORDER BY Nota DESC LIMIT 1;
