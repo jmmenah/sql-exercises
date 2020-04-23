@@ -1,6 +1,6 @@
 -- Crear usuario en Oracle
 
-CREATE USER trofeo_alcaldesa IDENTIFIED BY secreto
+CREATE USER coordenadas IDENTIFIED BY secreto
 default tablespace users;
 grant connect,create session, resource to trofeo_alcaldesa;
 grant resource to trofeo_alcaldesa;
